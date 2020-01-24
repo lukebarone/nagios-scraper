@@ -25,7 +25,7 @@ def main():
     """
     Main entry to the program
     """
-    
+
     # for nagios_entry in ALL_NAGIOS_INFO:
     for url, auth_data in NAGIOS_DATA.items():
         user, password, auth_type = auth_data["user"], auth_data["password"], \
@@ -76,6 +76,7 @@ def print_stats(
         user, url, hosts_up, hosts_down, hosts_unreachable, hosts_pending,
         hosts_problems, hosts_types, service_ok, service_warning,
         service_unknown, service_critical, service_problems, service_types))
+
 
 if __name__ == '__main__':
     main()
