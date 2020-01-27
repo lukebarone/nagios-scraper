@@ -42,6 +42,36 @@ def print_stats(user, url, extracted_information):
     print(template.format(user=user, url=url, **extracted_information))
 
 
+def get_info(html_to_parse):
+    """Get the data parsed from the HTML Response
+
+    Args:
+        html_to_parse (HTTPResponse): The reponse object containing the Nagios webpage we are scraping
+
+    Returns: Dictionary of parameters, sorted out
+    """
+
+    html = BeautifulSoup(html_to_parse.text, "html.parser")
+    td_elements = list(html.select('td'))
+    hosts_all = td_elements[3].text.split('\n')
+    service_all = td_elements[12].text.split('\n')
+    extracted_information = {
+        'hosts_up': hosts_all[12],
+        'hosts_down': hosts_all[13],
+        'hosts_unreachable': hosts_all[14],
+        'hosts_pending': hosts_all[15],
+        'hosts_problems': hosts_all[24],
+        'hosts_types': hosts_all[25],
+        'service_ok': service_all[13],
+        'service_warning': service_all[14],
+        'service_unknown': service_all[15],
+        'service_critical': service_all[16],
+        'service_problems': service_all[26],
+        'service_types': service_all[27],
+    }
+    return extracted_information
+
+
 def main():
     """
     Main entry to the program
@@ -54,26 +84,8 @@ def main():
         response = get_url_response(full_url, user, password, auth_type)
         if response.status_code != 200:
             continue
-
-        html = BeautifulSoup(response.text, "html.parser")
-        td_elements = list(html.select('td'))
-        hosts_all = td_elements[3].text.split('\n')
-        service_all = td_elements[12].text.split('\n')
-        extracted_information = {
-            'hosts_up': hosts_all[12],
-            'hosts_down': hosts_all[13],
-            'hosts_unreachable': hosts_all[14],
-            'hosts_pending': hosts_all[15],
-            'hosts_problems': hosts_all[24],
-            'hosts_types': hosts_all[25],
-            'service_ok': service_all[13],
-            'service_warning': service_all[14],
-            'service_unknown': service_all[15],
-            'service_critical': service_all[16],
-            'service_problems': service_all[26],
-            'service_types': service_all[27],
-        }
-        print_stats(user, url, extracted_information)
+        extracted_info = get_info(response)
+        print_stats(user, url, extracted_info)
 
 
 if __name__ == '__main__':
