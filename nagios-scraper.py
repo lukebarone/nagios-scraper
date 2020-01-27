@@ -43,8 +43,8 @@ def print_stats(user, url, extracted_information):
         '{hosts_problems}\t\t{hosts_types}\n'
         '        Services\n'
         'OK\tWarning\tUnknown\tCritical\tProblems\tTypes\n'
-        '{service_ok}\t{service_warning}\t{service_unknown}\t{service_critical}'
-        '\t\t{service_problems}\t\t{service_types}\n' )
+        '{service_ok}\t{service_warning}\t{service_unknown}\t'
+        '{service_critical}\t\t{service_problems}\t\t{service_types}\n')
     print(template.format(user=user, url=url, **extracted_information))
 
 
@@ -70,10 +70,10 @@ def print_all_stats(user, url, extracted_information):
         service_unknown, service_critical, service_problems, service_types,
         "{user}@{url}".format(user=a, url=b, **c)]"""
         data_to_print += (
-    '{hosts_up}\t{hosts_down}\t{hosts_unreachable}\t{hosts_pending}\t'
-    '{hosts_problems}\t{hosts_types}\t{service_ok}\t{service_warning}\t'
-    '{service_unknown}\t{service_critical}\t{service_problems}\t'
-    '{service_types}\t{user}@{url}\n'.format(user=a, url=b, **c))
+            '{hosts_up}\t{hosts_down}\t{hosts_unreachable}\t{hosts_pending}\t'
+            '{hosts_problems}\t{hosts_types}\t{service_ok}\t{service_warning}'
+            '\t{service_unknown}\t{service_critical}\t{service_problems}\t'
+            '{service_types}\t{user}@{url}\n'.format(user=a, url=b, **c))
 
     print(header, data_to_print)
 
@@ -94,12 +94,13 @@ def print_tables(user, url, extracted_information):
     data = []
     for (a, b, c) in zip(user, url, extracted_information):
         data.append([c["hosts_up"], c["hosts_down"], c["hosts_unreachable"],
-                     c["hosts_pending"], c["hosts_problems"], c["hosts_types"],
-                     c["service_ok"], c["service_warning"],
+                     c["hosts_pending"], c["hosts_problems"],
+                     c["hosts_types"], c["service_ok"], c["service_warning"],
                      c["service_unknown"], c["service_critical"],
                      c["service_problems"], c["service_types"],
                      '{user}@{url}'.format(user=a, url=b)])
-    print(tabulate(data, headers=headers, tablefmt='simple', numalign='center'))
+    print(tabulate(data, headers=headers, tablefmt='simple',
+                   numalign='center'))
 
 
 def get_info(html_to_parse):
@@ -143,7 +144,8 @@ def main(argv):
     parser = argparse.ArgumentParser(description="Multi-site Nagios Scraper")
     group = parser.add_mutually_exclusive_group()
     group.add_argument("-w", "--wide",
-                       help="Prints the table of information in wide-screen format",
+                       help="Prints the table of information in wide-screen "
+                       + "format",
                        action="store_true")
     group.add_argument("-n", "--narrow",
                        help="Prints the table of information in narrow format",
