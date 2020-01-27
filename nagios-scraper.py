@@ -35,13 +35,16 @@ def print_stats(user, url, extracted_information):
     Returns: A table for each instance listing its stats
     """
 
-    template = """{user}@{url}:
-                Hosts
-    Up\tDown\tUnreachable\tPending\tProblems\tTypes
-    {hosts_up}\t{hosts_down}\t{hosts_unreachable}\t\t{hosts_pending}\t{hosts_problems}\t\t{hosts_types}
-                Services
-    OK\tWarning\tUnknown\tCritical\tProblems\tTypes
-    {service_ok}\t{service_warning}\t{service_unknown}\t{service_critical}\t\t{service_problems}\t\t{service_types}"""
+    template = (
+        '{user}@{url}:\n'
+        '        Hosts\n'
+        'Up\tDown\tUnreachable\tPending\tProblems\tTypes\n'
+        '{hosts_up}\t{hosts_down}\t{hosts_unreachable}\t\t{hosts_pending}\t'
+        '{hosts_problems}\t\t{hosts_types}\n'
+        '        Services\n'
+        'OK\tWarning\tUnknown\tCritical\tProblems\tTypes\n'
+        '{service_ok}\t{service_warning}\t{service_unknown}\t{service_critical}'
+        '\t\t{service_problems}\t\t{service_types}\n' )
     print(template.format(user=user, url=url, **extracted_information))
 
 
@@ -62,8 +65,15 @@ def print_all_stats(user, url, extracted_information):
     """
     data_to_print = ""
     for (a, b, c) in zip(user, url, extracted_information):
-        data_to_print += """
-    {hosts_up}\t{hosts_down}\t{hosts_unreachable}\t{hosts_pending}\t{hosts_problems}\t{hosts_types}\t{service_ok}\t{service_warning}\t{service_unknown}\t{service_critical}\t{service_problems}\t{service_types}\t{user}@{url}""".format(user=a, url=b, **c)
+        """fields = [hosts_up, hosts_down, hosts_unreachable, hosts_pending,
+        hosts_problems, hosts_types, service_ok, service_warning,
+        service_unknown, service_critical, service_problems, service_types,
+        "{user}@{url}".format(user=a, url=b, **c)]"""
+        data_to_print += (
+    '{hosts_up}\t{hosts_down}\t{hosts_unreachable}\t{hosts_pending}\t'
+    '{hosts_problems}\t{hosts_types}\t{service_ok}\t{service_warning}\t'
+    '{service_unknown}\t{service_critical}\t{service_problems}\t'
+    '{service_types}\t{user}@{url}\n'.format(user=a, url=b, **c))
 
     print(header, data_to_print)
 
