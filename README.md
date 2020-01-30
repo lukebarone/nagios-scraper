@@ -1,6 +1,8 @@
 Nagios Scraper
 ===
 
+![Python application](https://github.com/lukebarone/nagios-scraper/workflows/Python%20application/badge.svg)
+
 ### Purpose:
 
 If you are running multiple Nagios sessions in your browser, you need to constantly check in with them. If authentication is turned on, sometimes you have to re-login to them. This script is built to give ONE console of information from ALL your Nagios sources through the command line.
@@ -49,7 +51,6 @@ exampleuser@https://www.example.com/nagios:
 
 ### Target Objectives (features to come)
 
-- Better output table (queueing the results and print with one header)
 - Colour coding the results (i.e. green for good, red for bad)
 - Error handling
 - Web page output
