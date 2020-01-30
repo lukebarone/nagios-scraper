@@ -18,6 +18,10 @@ If you are running multiple Nagios sessions in your browser, you need to constan
         - `auth_type` is either Basic or Digest. If one doesn't work, try the other.
     - You can have as many keys as you want, as long as the three parameters are specified
 - Ensure you have `python3` installed (untested with Python2, which is EOL anyways)
+- Ensure you have `pip3` installed to install the dependencies:
+    - tabulate
+    - bs4 (BeautifulSoup)
+- Run `python3 -m pip install -r requirements.txt` to auto-install the required libraries
 - Run `python3 nagios-scraper.py`
 
 If you mess up the configuration, copy the example file back over the official .conf file, and start again.
