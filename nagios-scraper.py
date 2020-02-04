@@ -16,7 +16,8 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
-    
+
+
 def get_url_response(url, user, password, auth_type):
     """Get the response from a URL.
 
@@ -51,18 +52,18 @@ def print_stats(user, url, extracted_information):
         'Up\tDown\tUnreachable\tPending\tProblems\tTypes\n'
         + bcolors.ENDC
         + bcolors.OKGREEN + '{hosts_up}\t'
-        + bcolors.FAIL    + '{hosts_down}\t'
+        + bcolors.FAIL + '{hosts_down}\t'
         + bcolors.WARNING + '{hosts_unreachable}\t\t'
-        + bcolors.OKBLUE  + '{hosts_pending}\t'
-        + bcolors.FAIL    + '{hosts_problems}\t\t'
-        + bcolors.ENDC    + '{hosts_types}\n'
-        + bcolors.HEADER  + '        Services\n'
+        + bcolors.OKBLUE + '{hosts_pending}\t'
+        + bcolors.FAIL + '{hosts_problems}\t\t'
+        + bcolors.ENDC + '{hosts_types}\n'
+        + bcolors.HEADER + '        Services\n'
         'OK\tWarning\tUnknown\tCritical\tProblems\tTypes\n'
         + bcolors.OKGREEN + '{service_ok}\t'
         + bcolors.WARNING + '{service_warning}\t'
-        + bcolors.OKBLUE  + '{service_unknown}\t'
-        + bcolors.FAIL    + '{service_critical}\t\t{service_problems}\t\t'
-        + bcolors.ENDC    + '{service_types}\n')
+        + bcolors.OKBLUE + '{service_unknown}\t'
+        + bcolors.FAIL + '{service_critical}\t\t{service_problems}\t\t'
+        + bcolors.ENDC + '{service_types}\n')
     print(template.format(user=user, url=url, **extracted_information))
 
 
@@ -78,35 +79,35 @@ def print_all_stats(user, url, extracted_information):
     """
 
     header = (
-        bcolors.HEADER  + 'Hosts:\t\t\t\t\t\tServices:\n'
-        + bcolors.OKGREEN   + 'Up\t'
-        + bcolors.FAIL      + 'Dn\t'
-        + bcolors.WARNING   + 'Un\t'
-        + bcolors.OKBLUE    + 'Pn\t'
-        + bcolors.FAIL      + 'Pr\t'
-        + bcolors.ENDC      + 'Ty\t'
-        + bcolors.OKGREEN   + 'OK\t'
-        + bcolors.WARNING   + 'Wrn\t'
-        + bcolors.OKBLUE    + 'Unk\t'
-        + bcolors.FAIL      + 'Crt\tPr\t'
-        + bcolors.ENDC      + 'Ty\t\t'
-        + bcolors.HEADER    + 'Where\n')
+        bcolors.HEADER + 'Hosts:\t\t\t\t\t\tServices:\n'
+        + bcolors.OKGREEN + 'Up\t'
+        + bcolors.FAIL + 'Dn\t'
+        + bcolors.WARNING + 'Un\t'
+        + bcolors.OKBLUE + 'Pn\t'
+        + bcolors.FAIL + 'Pr\t'
+        + bcolors.ENDC + 'Ty\t'
+        + bcolors.OKGREEN + 'OK\t'
+        + bcolors.WARNING + 'Wrn\t'
+        + bcolors.OKBLUE + 'Unk\t'
+        + bcolors.FAIL + 'Crt\tPr\t'
+        + bcolors.ENDC + 'Ty\t\t'
+        + bcolors.HEADER + 'Where\n')
     print(header)
     data_to_print = ""
     for (a, b, c) in zip(user, url, extracted_information):
         data_to_print += (
-            bcolors.OKGREEN     + '{hosts_up}\t'
-            + bcolors.FAIL      + '{hosts_down}\t'
-            + bcolors.WARNING   + '{hosts_unreachable}\t'
-            + bcolors.OKBLUE    + '{hosts_pending}\t'
-            + bcolors.FAIL      + '{hosts_problems}\t'
-            + bcolors.ENDC      + '{hosts_types}\t'
-            + bcolors.OKGREEN   + '{service_ok}\t'
-            + bcolors.WARNING   + '{service_warning}\t'
-            + bcolors.OKBLUE    + '{service_unknown}\t'
-            + bcolors.FAIL      + '{service_critical}\t{service_problems}\t'
-            + bcolors.ENDC      + '{service_types}\t'
-            + bcolors.HEADER    + '{user}@{url}\n').format(user=a, url=b, **c)
+            bcolors.OKGREEN + '{hosts_up}\t'
+            + bcolors.FAIL + '{hosts_down}\t'
+            + bcolors.WARNING + '{hosts_unreachable}\t'
+            + bcolors.OKBLUE + '{hosts_pending}\t'
+            + bcolors.FAIL + '{hosts_problems}\t'
+            + bcolors.ENDC + '{hosts_types}\t'
+            + bcolors.OKGREEN + '{service_ok}\t'
+            + bcolors.WARNING + '{service_warning}\t'
+            + bcolors.OKBLUE + '{service_unknown}\t'
+            + bcolors.FAIL + '{service_critical}\t{service_problems}\t'
+            + bcolors.ENDC + '{service_types}\t'
+            + bcolors.HEADER + '{user}@{url}\n').format(user=a, url=b, **c)
     print(data_to_print)
 
 
@@ -121,33 +122,33 @@ def print_tables(user, url, extracted_information):
     Returns: A table for each instance listing its stats
     """
     headers = [
-        bcolors.OKGREEN     + 'H Up',
-        bcolors.FAIL      + 'H Down',
-        bcolors.WARNING   + 'H Unreach',
-        bcolors.OKBLUE    + 'H Pend',
-        bcolors.FAIL      + 'H Problems',
-        bcolors.ENDC      + 'Types',
-        bcolors.OKGREEN   + 'S OK',
-        bcolors.WARNING   + 'S Warning',
-        bcolors.OKBLUE    + 'S Unknown',
-        bcolors.FAIL      + 'S Critical', 'S Problems',
-        bcolors.ENDC      + 'S Types',
-        bcolors.HEADER    + 'Where']
+        bcolors.OKGREEN + 'H Up',
+        bcolors.FAIL + 'H Down',
+        bcolors.WARNING + 'H Unreach',
+        bcolors.OKBLUE + 'H Pend',
+        bcolors.FAIL + 'H Problems',
+        bcolors.ENDC + 'Types',
+        bcolors.OKGREEN + 'S OK',
+        bcolors.WARNING + 'S Warning',
+        bcolors.OKBLUE + 'S Unknown',
+        bcolors.FAIL + 'S Critical', 'S Problems',
+        bcolors.ENDC + 'S Types',
+        bcolors.HEADER + 'Where']
     data = []
     for (a, b, c) in zip(user, url, extracted_information):
         data.append([
             bcolors.OKGREEN + c["hosts_up"],
-            bcolors.FAIL    + c["hosts_down"],
+            bcolors.FAIL + c["hosts_down"],
             bcolors.WARNING + c["hosts_unreachable"],
-            bcolors.OKBLUE  + c["hosts_pending"],
-            bcolors.FAIL    + c["hosts_problems"],
-            bcolors.ENDC    + c["hosts_types"],
+            bcolors.OKBLUE + c["hosts_pending"],
+            bcolors.FAIL + c["hosts_problems"],
+            bcolors.ENDC + c["hosts_types"],
             bcolors.OKGREEN + c["service_ok"],
             bcolors.WARNING + c["service_warning"],
-            bcolors.OKBLUE  + c["service_unknown"],
-            bcolors.FAIL    + c["service_critical"], c["service_problems"],
-            bcolors.ENDC    + c["service_types"],
-            bcolors.HEADER  + '{user}@{url}'.format(user=a, url=b)])
+            bcolors.OKBLUE + c["service_unknown"],
+            bcolors.FAIL + c["service_critical"], c["service_problems"],
+            bcolors.ENDC + c["service_types"],
+            bcolors.HEADER + '{user}@{url}'.format(user=a, url=b)])
     print(tabulate(data, headers=headers, tablefmt='simple',
                    numalign='center'))
 
