@@ -51,6 +51,6 @@ exampleuser@https://www.example.com/nagios:
 
 ### Target Objectives (features to come)
 
-- Colour coding the results (i.e. green for good, red for bad)
+- Colour coding the results (i.e. green for good, red for bad) **COMPLETED**
 - Error handling
 - Web page output
